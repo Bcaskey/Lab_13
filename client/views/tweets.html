@@ -1,0 +1,25 @@
+<h1>My Tweets!</h1>
+
+<!--{{userName}}
+{{text}}
+{{timeStamp}}-->
+
+<div>
+    <div>
+    <span></span>
+    <span><textarea type="text" name="text" ng-model="textModel" id="TextBoxStyle" cols="30" rows="10"></textarea></span>
+    <span></span>
+    </div>
+    <div> <button ng-click="submit"></button> </div>  
+</div>
+
+<!--data.json is the text holder-->
+
+
+<div ng-controller="tweetsController">
+    <div ng-repeat="tweet in tweets">
+    <span id="twtUser">{{tweet.user}}</span>
+    <span id="twtText">{{tweet.text}}</span>
+    <span id="twtCreated">{{tweet.createdAt}}</span>
+    </div>
+</div>
