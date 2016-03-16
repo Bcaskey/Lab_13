@@ -17,6 +17,7 @@ controllers.controller('tweetsController', ['$scope', '$rootScope', '$http', fun
             $scope.tweets = data;
         });
     };
+    $scope.getPost();
 
     $scope.sendPost = function() {
         var textObj = {
@@ -26,9 +27,11 @@ controllers.controller('tweetsController', ['$scope', '$rootScope', '$http', fun
         };
         $http.post('/messages', textObj)
         .then(function(){
-            $scope.getPost();    
+        $scope.tweets.push(textObj);
+            // console.log(textObj);   
     });
     }
+    $scope.getPost();
 }]);
 
 //  $http.get('/messages').success(function(data) {

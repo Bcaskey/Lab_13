@@ -5,8 +5,9 @@
 {{timeStamp}}-->
 
 <div>
-    <textarea type="text" ng-model="textModel" id="TextBoxStyle" cols="30" rows="10"></textarea><br>
-    <button ng-click="sendPost()"></button>
+    <textarea type="text" ng-model="textModel" id="TextBoxStyle" cols="90" rows="5"></textarea><br>
+    <button ng-click="sendPost()">Send Post</button>
+    <p></p>
 </div>
 
 <!--data.json is the text holder-->
@@ -14,8 +15,8 @@
 
 <div ng-controller="tweetsController">
     <div ng-repeat="tweet in tweets">
-    <span id="twtUser">{{tweet.user}}</span>
-    <span id="twtText">{{tweet.text}}</span>
-    <span id="twtCreated">{{tweet.createdAt}}</span>
+    <span class="userName" id="twtUser">{{tweet.user}}: </span>
+    <span id="twtText">{{tweet.text}}- </span>
+    <span class="twtTime" id="twtCreated">{{tweet.createdAt | date: 'M/dd h:mm'}}</span>
     </div>
 </div>
