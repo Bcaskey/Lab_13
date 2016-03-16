@@ -10,7 +10,9 @@ app.config(['$routeProvider', function($routeProvider) {
         controller: 'tweetsController'
     })
     .otherwise({
-        redirectTo: 'index.html'
+        // templateUrl: 'views/tweets.html',
+        // controller: 'LoginMessage',
+        redirectTo: '/welcome'
     });
 }])
    

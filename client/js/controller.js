@@ -1,38 +1,31 @@
 var controllers = angular.module('myApp.controllers', []);
-controllers.controller('LoginMessage', ['$scope', function($scope){
-    $scope.hdrText = "Twitter, I'm mocking you too...";
-    $scope.usrReq = "Please submit your User Name";
-    $scope.user = "Brian";   //submitUser()
-}])
 
 
-controllers.controller('welcomeController', ['$scope', function($scope) {
-    $scope.welcomeMessage = 'Welcome To My Mock Twitter!';
-    $scope.weather = "It's sunny and 85 degrees outside!";
+
+controllers.controller('welcomeController', ['$scope', '$rootScope', function($scope, $rootScope) {
+    $scope.save = function(){
+        $rootScope.username = $scope.username;
+        window.location.href = '#/tweets';
+    };
 }]);
 
-controllers.controller('tweetsController', ['$scope', '$http', function($scope, $http) {
-    $http.get('/messages').success(function(data) {
+controllers.controller('tweetsController', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
+    var myUser = $rootScope.username;
+    $http.get('/messages').then(function(data) {
         $scope.tweets = data;
-        console.log($scope.tweets);
     });
-    var sendPost = function() {
-        $http.post('/messages', $scope.textModel) .success(function($scope, $interval) {
-            console.log($scope.textModel);
-            $interval (function(){
-                $scope.theTime = new Date().toLocaleTimeString();
-            });
+    $scope.sendPost = function() {
+        console.log($rootScope.username);
+        var textObj = {
+            "user": myUser,
+            "text": $scope.textModel,
+            "createdAt": '1/1/1'
+        };
+        console.log(textObj);
+        $http.post('/messages', textObj)
+        .then(function(){
+           console.log('success'); 
         });
     }
 }]);
-
-
-// <div class="page-header">
-// 				<h3 >Twitter, I'm mocking you too...</h3>
-//                 Please submit your user name:
-//                 <input type="text" ng-model="user">{{user}}
-//                 <button ng-click="submitUser()"></button>
-// 			</div>
-
-
 
