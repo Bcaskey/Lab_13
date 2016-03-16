@@ -11,21 +11,26 @@ controllers.controller('welcomeController', ['$scope', '$rootScope', function($s
 
 controllers.controller('tweetsController', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
     var myUser = $rootScope.username;
-    $http.get('/messages').then(function(data) {
-        $scope.tweets = data;
-    });
+
+    $scope.getPost = function(){
+        $http.get('/messages').success(function(data) {
+            $scope.tweets = data;
+        });
+    };
+
     $scope.sendPost = function() {
-        console.log($rootScope.username);
         var textObj = {
             "user": myUser,
             "text": $scope.textModel,
             "createdAt": '1/1/1'
         };
-        console.log(textObj);
         $http.post('/messages', textObj)
         .then(function(){
-           console.log('success'); 
-        });
+            $scope.getPost();    
+    });
     }
 }]);
 
+//  $http.get('/messages').success(function(data) {
+//         $scope.tweets = data;
+//     });
